@@ -16,11 +16,21 @@
               >
                 <drag
                   :key="item.value"
+                  :transfer-data="item"
+                  @dragstart="handleDragStart"
+                  @dragend="handleDragEnd"
                 >
                   {{ header.text }}
                 </drag>
               </template>
             </v-data-table>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <trash-can
+              :isDragging="isDragging"
+            />
           </v-col>
         </v-row>
       </v-container>
@@ -29,12 +39,16 @@
 </template>
 
 <script>
-
+import TrashCan from '@/components/TrashCan'
 
 export default {
   name: 'App',
+  components: {
+    TrashCan
+  },
   data() {
     return {
+      isDragging: false,
       headers: [
         {
           text: 'Dessert (100g serving)',
@@ -135,7 +149,13 @@ export default {
   methods: {
     headerSlotName(value) {
       return `header.${value}`
-    }
+    },
+    handleDragStart() {
+      this.isDragging = true
+    },
+    handleDragEnd() {
+      this.isDragging = false
+    },
   }
 };
 </script>

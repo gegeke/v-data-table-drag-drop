@@ -1,10 +1,12 @@
 <template>
-  <div>
+  <div
+    v-if="isDragging"
+  >
     <drop
       @drop="handleDrop"
     >
       <div
-        class="drop-area"
+        class="d-flex justify-center align-center drop-area"
       >
         PUT IT IN THE TRASHCAN
       </div>
@@ -15,9 +17,15 @@
 <script>
 export default {
   name: "TrashCan",
+  props: {
+    isDragging: {
+      type: Boolean,
+      required: true
+    }
+  },
   methods: {
     handleDrop(data) {
-      console.log(data)
+      console.log('to trash:', data)
     }
   }
 }
