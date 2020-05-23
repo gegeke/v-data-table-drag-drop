@@ -9,7 +9,14 @@
               :items="desserts"
               :items-per-page="5"
               class="elevation-1"
-            ></v-data-table>
+            >
+              <template
+                v-for="slot in headers"
+                v-slot:[headerSlotName(slot.value)]="{ header }"
+              >
+                {{ header.text }}
+              </template>
+            </v-data-table>
           </v-col>
         </v-row>
       </v-container>
@@ -121,5 +128,10 @@ export default {
       ],
     }
   },
+  methods: {
+    headerSlotName(value) {
+      return `header.${value}`
+    }
+  }
 };
 </script>
