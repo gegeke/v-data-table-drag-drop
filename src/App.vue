@@ -11,10 +11,14 @@
               class="elevation-1"
             >
               <template
-                v-for="slot in headers"
-                v-slot:[headerSlotName(slot.value)]="{ header }"
+                v-for="item in headers"
+                v-slot:[headerSlotName(item.value)]="{ header }"
               >
-                {{ header.text }}
+                <drag
+                  :key="item.value"
+                >
+                  {{ header.text }}
+                </drag>
               </template>
             </v-data-table>
           </v-col>
